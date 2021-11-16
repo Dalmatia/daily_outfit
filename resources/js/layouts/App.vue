@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
             <router-link :to="{ name: 'home' }" class="navbar-brand"
                 >DailyOutfits</router-link
             >
@@ -22,7 +22,6 @@
                             Home
                         </router-link>
                     </li>
-
                     <li class="nav-item">
                         <router-link
                             class="nav-link"
@@ -31,6 +30,14 @@
                         >
                             About
                         </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link
+                            class="nav-link"
+                            data-toggle="collapse"
+                            :to="{ name: 'login' }"
+                            >ログイン / 新規登録</router-link
+                        >
                     </li>
                 </ul>
             </div>
