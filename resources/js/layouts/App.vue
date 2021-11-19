@@ -1,56 +1,26 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-            <router-link :to="{ name: 'home' }" class="navbar-brand"
-                >DailyOutfits</router-link
-            >
-            <button
-                class="navbar-toggler"
-                data-toggle="collapse"
-                data-target="#navbarCollapse"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link
-                            class="nav-link"
-                            data-toggle="collapse"
-                            :to="{ name: 'home' }"
-                        >
-                            Home
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link
-                            class="nav-link"
-                            data-toggle="collapse"
-                            :to="{ name: 'about' }"
-                        >
-                            About
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link
-                            class="nav-link"
-                            data-toggle="collapse"
-                            :to="{ name: 'login' }"
-                            >ログイン / 新規登録</router-link
-                        >
-                    </li>
-                </ul>
+        <header>
+            <Navbar />
+        </header>
+        <main>
+            <div class="container">
+                <router-view></router-view>
             </div>
-        </nav>
-
-        <div class="container">
-            <router-view></router-view>
-        </div>
+        </main>
+        <Footer />
     </div>
 </template>
 
 <script>
+import Navbar from '../pages/Navbar.vue';
+import Footer from '../pages/Footer.vue';
+
 export default {
+    components: {
+        Navbar,
+        Footer,
+    },
     watch: {
         $route() {
             $('#navbarCollapse').collapse('hide');
