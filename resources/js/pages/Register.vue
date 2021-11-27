@@ -9,7 +9,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            name="name"
+                            id="accountname"
                             v-model="formData.name"
                         />
                         <p class="text-danger" v-text="errors.name"></p>
@@ -19,7 +19,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            name="email"
+                            id="email"
                             v-model="formData.email"
                         />
                         <p class="text-danger" v-text="errors.email"></p>
@@ -27,9 +27,9 @@
                     <div class="form-group">
                         <label for="password">パスワード :</label>
                         <input
-                            type="text"
+                            type="password"
                             class="form-control"
-                            name="password"
+                            id="password"
                             v-model="formData.password"
                         />
                         <p class="text-danger" v-text="errors.password"></p>
@@ -41,7 +41,7 @@
                         <input
                             type="password"
                             class="form-control"
-                            name="password_confirmation"
+                            id="password_confirmation"
                             v-model="formData.password_confirmation"
                         />
                         <p

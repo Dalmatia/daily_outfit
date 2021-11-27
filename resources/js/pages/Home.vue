@@ -1,19 +1,27 @@
 <template>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Home</div>
-
-                    <div class="card-body">Home Page</div>
-                </div>
-            </div>
-        </div>
+    <div class="mt-5">
+        <v-app>
+            <Calender />
+        </v-app>
     </div>
 </template>
 
 <script>
+import Calender from './Calender.vue';
+
 export default {
-  
+    components: {
+        Calender,
+    },
 };
 </script>
+
+<style>
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+</style>

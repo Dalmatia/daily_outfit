@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
         <div class="container">
             <router-link :to="{ name: 'home' }" class="navbar-brand"
                 >DailyOutfits</router-link
@@ -34,7 +34,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item m-auto">
-                        <button class="btn btn-light">
+                        <button class="btn btn-outline-secondary">
                             コーディネートを投稿する
                         </button>
                     </li>

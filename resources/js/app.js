@@ -9,7 +9,10 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 import router from './router';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 import App from './layouts/App.vue';
+import Vue from 'vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,10 +25,9 @@ import App from './layouts/App.vue';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component(
-    'example-component',
-    require('./components/ExampleComponent.vue').default
-);
+Vue.component('App', require('./layouts/App.vue').default);
+
+Vue.use(Vuetify);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,7 +36,8 @@ Vue.component(
  */
 
 const app = new Vue({
-    router,
     el: '#app',
+    router,
+    vuetify: new Vuetify(),
     render: (h) => h(App),
 });
