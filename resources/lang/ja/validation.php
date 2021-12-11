@@ -120,6 +120,7 @@ return [
         'name' => 'アカウント名',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'password_confirmation' => 'パスワード(再確認)'
     ],
 
 ];

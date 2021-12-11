@@ -24,15 +24,8 @@
                     </v-menu>
                 </v-toolbar>
             </v-sheet>
-            <v-sheet height="500">
-                <v-calendar
-                    ref="calender"
-                    locale="ja-jp"
-                    :type="type"
-                    :now="today"
-                    :value="today"
-                    color="primary"
-                >
+            <v-sheet height="100vh">
+                <v-calendar locale="ja-jp" :type="type" color="primary">
                 </v-calendar>
             </v-sheet>
         </v-col>
@@ -42,5 +35,10 @@
 <script>
 export default {
     name: 'Calender',
+    data(){
+        return {
+            type: 'month'
+        }
+    }
 };
 </script>

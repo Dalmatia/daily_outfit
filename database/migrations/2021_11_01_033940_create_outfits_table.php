@@ -15,7 +15,6 @@ class CreateOutfitsTable extends Migration
     {
         Schema::create('outfits', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('outfit');
             $table->text('description');
             $table->date('outfit_date');

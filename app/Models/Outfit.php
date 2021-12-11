@@ -4,16 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use Illuminate\Support\Arr;
 
 class Coordinate extends Model
 {
     use HasFactory;
 
-    protected $table = 'outfits';
+    protected $keyType = 'string';
 
-    public function user()
+    const ID_LENGTH = 12;
+
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo(User::class);
+        parent::__construct($attributes);
+
+        if (!Arr::get($this->attributes, 'id')) {
+            $this->setId();
+        }
+    }
+
+    private function setId()
+    {
+        $this->attributes['id'] = $this->getRandomId();
+    }
+
+    private function getRandomId()
+    {
+        $characters = array_merge(
+            range(0, 9),
+            range('a', 'z'),
+            range('A', 'Z'),
+            ['-', '_']
+        );
+
+        $length = count($characters);
+
+        $id = "";
+
+        for ($i = 0; $i < self::ID_LENGTH; $i++) {
+            $id .= $characters[random_int(0, $length - 1)];
+        }
+
+        return $id;
     }
 }
