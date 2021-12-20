@@ -20,13 +20,18 @@ class AuthController extends Controller
             'password_confirmation' => ['required']
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
 
-        return response()->json(['msg' => '登録が完了しました']);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
     }
 
     public function login(Request $request)
@@ -43,6 +48,8 @@ class AuthController extends Controller
                 'email' => ['メールアドレス又はパスワードが正しくありません。']
             ]);
         }
+
+        Auth::login($user);
     }
 
     public function logout()

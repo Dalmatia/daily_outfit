@@ -17,29 +17,22 @@ class OutfitController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        return Outfit::all();
+    }
+
     public function create(StoreOutfit $request)
     {
-        $extension = $request->outfit->extension();
+        $filePath = $request->outfit->store('outfits');
 
-        $outfit = new Outfit();
+        $outfit = new Outfit;
+        $outfit->outfit = basename($filePath);
+        $outfit->description = $request->description;
+        $outfit->user_id = Auth::id();
 
-        $outfit->filename = $outfit->id . '.' . $extension;
+        $outfit->save();
 
-        $request->outfit->storeAs('outfits', $outfit->filename, 'public');
-
-        DB::beginTransaction();
-
-        try {
-            Auth::user()->outfits()->save($outfit);
-            DB::commit();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            // DBとの不整合を避けるためアップロードしたファイルを削除
-            Storage::disk()->delete($outfit->filename);
-            throw $exception;
-        }
-
-        // リソースの新規作成なので
         // レスポンスコードは201(CREATED)を返却する
         return response($outfit, 201);
     }

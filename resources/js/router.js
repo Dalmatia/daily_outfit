@@ -5,6 +5,7 @@ import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Register from './pages/Register.vue';
 import Login from './pages/Login.vue';
+import OutfitDetail from './pages/OutfitDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: Login,
+        },
+        {
+            path: '/outfits/:id',
+            component: OutfitDetail,
+            props: true,
         },
     ],
 });

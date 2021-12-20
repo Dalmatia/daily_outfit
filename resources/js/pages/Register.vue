@@ -9,7 +9,7 @@
                         <input
                             type="text"
                             class="form-control"
-                            id="accountname"
+                            id="name"
                             v-model="formData.name"
                         />
                         <p class="text-danger" v-text="errors.name"></p>

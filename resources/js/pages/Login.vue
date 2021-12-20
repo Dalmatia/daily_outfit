@@ -12,7 +12,11 @@
                             name="email"
                             v-model="formData.email"
                         />
-                        <p class="text-danger" v-text="errors.email"></p>
+                        <div
+                            class="alert alert-danger"
+                            v-text="errors.email"
+                            v-if="errors.email"
+                        ></div>
                     </div>
                     <div class="form-group">
                         <label for="password">パスワード :</label>
@@ -22,7 +26,11 @@
                             name="password"
                             v-model="formData.password"
                         />
-                        <p class="text-danger" v-text="errors.password"></p>
+                        <div
+                            class="alert alert-danger"
+                            v-text="errors.password"
+                            v-if="errors.password"
+                        ></div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">

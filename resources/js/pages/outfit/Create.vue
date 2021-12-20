@@ -1,18 +1,16 @@
 <template>
     <div class="outfit-form">
         <h2 class="title">コーディネートを投稿する</h2>
-        <form class="form" @submit.prevent="">
+        <div>
             <div class="form-group">
                 <label>コーディネート写真</label>
-                {{ description }}
                 <input
                     class="form-control"
                     type="file"
                     name="outfit"
                     @change="onFileChange"
-
                 />
-                <output class="form__output" v-if="preview">
+                <output class="form-output" v-if="preview">
                     <img
                         class="img-fluid img-thumbnail"
                         :src="preview"
@@ -30,11 +28,15 @@
                 ></textarea>
             </div>
             <div class="form-group">
-                <button class="btn btn-dark text-light" type="submit" @click="submit">
+                <button
+                    class="btn btn-dark text-light"
+                    type="submit"
+                    @click="submit"
+                >
                     投稿する
                 </button>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -54,11 +56,19 @@ export default {
         };
     },
     methods: {
-        submit: function(){
-            axios.post('/api/outfits', {
-                outfit: this.outfit,
-                description: this.description
-            })
+        submit: function () {
+            const formData = new FormData();
+            formData.append('outfit', this.outfit);
+            formData.append('description', this.description);
+
+            axios
+                .post('/api/outfits', formData)
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
         },
         onFileChange(event) {
             if (event.target.files.length === 0) {
@@ -78,9 +88,11 @@ export default {
             };
 
             reader.readAsDataURL(event.target.files[0]);
+            this.outfit = event.target.files[0];
         },
         reset() {
             this.preview = '';
+            this.outfit = null;
             this.$el.querySelector('input[type="file"]').value = null;
         },
     },
