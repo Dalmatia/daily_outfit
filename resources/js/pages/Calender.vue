@@ -24,7 +24,7 @@
                     </v-menu>
                 </v-toolbar>
             </v-sheet>
-            <v-sheet height="100vh">
+            <v-sheet height="150vh">
                 <v-calendar locale="ja-jp" :type="type" color="primary">
                 </v-calendar>
             </v-sheet>

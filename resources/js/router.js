@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from './pages/Home.vue';
-import About from './pages/About.vue';
+import Favorites from './pages/Favorites.vue';
 import Register from './pages/Register.vue';
 import Login from './pages/Login.vue';
 import OutfitDetail from './pages/OutfitDetail.vue';
@@ -19,9 +19,9 @@ const router = new VueRouter({
             component: Home,
         },
         {
-            path: '/about',
-            name: 'about',
-            component: About,
+            path: '/favorites',
+            name: 'favorites',
+            component: Favorites,
         },
         {
             path: '/register',

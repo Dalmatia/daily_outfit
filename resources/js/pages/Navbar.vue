@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-0 bg-white">
             <div class="container">
                 <router-link :to="{ name: 'home' }" class="navbar-brand"
                     >DailyOutfits</router-link
@@ -27,16 +27,16 @@
                             <router-link
                                 class="nav-link"
                                 data-toggle="collapse"
-                                :to="{ name: 'about' }"
+                                :to="{ name: 'favorites' }"
                             >
-                                About
+                                Favorites
                             </router-link>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item m-auto">
                             <button
-                                class="btn btn-outline-secondary"
+                                class="btn btn-outline-dark"
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"
                                 @click="showForm = !showForm"
