@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer fixed-bottom text-center mb-1">
+    <footer class="footer fixed-bottom text-center">
         <button
             class="btn btn-link text-secondary text-decoration-none"
             @click.prevent="logout"

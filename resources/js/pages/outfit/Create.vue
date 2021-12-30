@@ -1,7 +1,7 @@
 <template>
     <div class="outfit-form">
         <h2 class="title">コーディネートを投稿する</h2>
-        <div>
+        <form class="form" @submit.prevent="submit">
             <div class="form-group">
                 <label>コーディネート写真</label>
                 <input
@@ -28,15 +28,11 @@
                 ></textarea>
             </div>
             <div class="form-group">
-                <button
-                    class="btn btn-dark text-light"
-                    type="submit"
-                    @click="submit"
-                >
+                <button class="btn btn-dark text-light" type="submit">
                     投稿する
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -63,8 +59,8 @@ export default {
 
             axios
                 .post('/api/outfits', formData)
-                .then((res) => {
-                    console.log(res);
+                .then((response) => {
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.log(error.response);

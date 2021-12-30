@@ -14,7 +14,7 @@ class OutfitController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     public function index()
@@ -24,7 +24,7 @@ class OutfitController extends Controller
 
     public function create(StoreOutfit $request)
     {
-        $filePath = $request->outfit->store('outfits');
+        $filePath = $request->outfit->store('outfits', 'public');
 
         $outfit = new Outfit;
         $outfit->outfit = basename($filePath);
@@ -35,5 +35,12 @@ class OutfitController extends Controller
 
         // レスポンスコードは201(CREATED)を返却する
         return response($outfit, 201);
+    }
+
+    public function show(string $id)
+    {
+        $outfit = Outfit::where('id', $id)->with(['user'])->first();
+
+        return $outfit ?? abort(404);
     }
 }

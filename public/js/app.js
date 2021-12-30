@@ -2467,6 +2467,125 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      outfit: null,
+      description: null,
+      fullWidth: false
+    };
+  },
+  created: function created() {
+    this.fetchOutfit();
+  },
+  methods: {
+    fetchOutfit: function fetchOutfit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get("/api/outfits/".concat(_this.id));
+
+              case 2:
+                response = _context.sent;
+                console.log(response);
+                _this.outfit = response.data;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/Register.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/Register.vue?vue&type=script&lang=js& ***!
@@ -2632,10 +2751,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     value: {
@@ -2655,8 +2770,8 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('outfit', this.outfit);
       formData.append('description', this.description);
-      axios.post('/api/outfits', formData).then(function (res) {
-        console.log(res);
+      axios.post('/api/outfits', formData).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {
         console.log(error.response);
       });
@@ -39762,15 +39877,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _OutfitDetail_vue_vue_type_template_id_1ccacf86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OutfitDetail.vue?vue&type=template&id=1ccacf86& */ "./resources/js/pages/OutfitDetail.vue?vue&type=template&id=1ccacf86&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _OutfitDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OutfitDetail.vue?vue&type=script&lang=js& */ "./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _OutfitDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _OutfitDetail_vue_vue_type_template_id_1ccacf86___WEBPACK_IMPORTED_MODULE_0__.render,
   _OutfitDetail_vue_vue_type_template_id_1ccacf86___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -39974,6 +40091,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Navbar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/Navbar.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OutfitDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./OutfitDetail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/OutfitDetail.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_OutfitDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -40428,7 +40561,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "footer",
-    { staticClass: "footer fixed-bottom text-center mb-1" },
+    { staticClass: "footer fixed-bottom text-center" },
     [
       _c(
         "button",
@@ -40876,14 +41009,107 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h2", [_vm._v("Outfit Detail")]),
+    _vm._v(" "),
+    _vm.outfit
+      ? _c(
+          "div",
+          {
+            staticClass: "container",
+            class: { "outfit-detail--column": _vm.fullWidth },
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "col-sm-12 col-md-5",
+                  on: {
+                    click: function ($event) {
+                      _vm.fullWidth = !_vm.fullWidth
+                    },
+                  },
+                },
+                [
+                  _c("img", {
+                    staticClass: "img-fluid m-2 d-block mx-auto",
+                    attrs: { src: _vm.outfit.url, alt: "" },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "\n                    col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7\n                ",
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: {
+                        href: "/outfits/" + _vm.outfit.url + "/download",
+                        title: "Download outfit",
+                      },
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-download" }),
+                      _vm._v("Download\n                "),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "description border-bottom",
+                    domProps: { textContent: _vm._s(_vm.outfit.description) },
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("h2", { staticClass: "outfit-detail-comment font-alt" }, [
+                    _vm._v("コメント"),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("br"),
+                ]
+              ),
+            ]),
+          ]
+        )
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Outfit Detail")])])
+    return _c(
+      "button",
+      {
+        staticClass: "button--like btn btn-outline-dark",
+        attrs: { title: "Like outfit" },
+      },
+      [_c("i", { staticClass: "fas fa-heart" }), _vm._v("12\n                ")]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form" }, [
+      _c("textarea", { staticClass: "form-control", attrs: { rows: "3" } }),
+    ])
   },
 ]
 render._withStripped = true
@@ -41110,67 +41336,82 @@ var render = function () {
   return _c("div", { staticClass: "outfit-form" }, [
     _c("h2", { staticClass: "title" }, [_vm._v("コーディネートを投稿する")]),
     _vm._v(" "),
-    _c("div", [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("コーディネート写真")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "file", name: "outfit" },
-          on: { change: _vm.onFileChange },
-        }),
-        _vm._v(" "),
-        _vm.preview
-          ? _c("output", { staticClass: "form-output" }, [
-              _c("img", {
-                staticClass: "img-fluid img-thumbnail",
-                attrs: { src: _vm.preview, alt: "" },
-              }),
-            ])
-          : _vm._e(),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("何か書く(コーディネートのポイントなど)")]),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.description,
-              expression: "description",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { maxlength: "200", name: "description" },
-          domProps: { value: _vm.description },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.description = $event.target.value
-            },
+    _c(
+      "form",
+      {
+        staticClass: "form",
+        on: {
+          submit: function ($event) {
+            $event.preventDefault()
+            return _vm.submit.apply(null, arguments)
           },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-dark text-light",
-            attrs: { type: "submit" },
-            on: { click: _vm.submit },
-          },
-          [_vm._v("\n                投稿する\n            ")]
-        ),
-      ]),
-    ]),
+        },
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("コーディネート写真")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "file", name: "outfit" },
+            on: { change: _vm.onFileChange },
+          }),
+          _vm._v(" "),
+          _vm.preview
+            ? _c("output", { staticClass: "form-output" }, [
+                _c("img", {
+                  staticClass: "img-fluid img-thumbnail",
+                  attrs: { src: _vm.preview, alt: "" },
+                }),
+              ])
+            : _vm._e(),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("何か書く(コーディネートのポイントなど)")]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { maxlength: "200", name: "description" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+      ]
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-dark text-light", attrs: { type: "submit" } },
+        [_vm._v("\n                投稿する\n            ")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
