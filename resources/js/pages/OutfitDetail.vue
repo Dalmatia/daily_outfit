@@ -20,7 +20,7 @@
                     "
                 >
                     <a
-                        :href="`/outfits/${outfit.url}/download`"
+                        :href="`/outfits/${outfit.id}/download`"
                         class="btn btn-secondary"
                         title="Download outfit"
                     >

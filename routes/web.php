@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OutfitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/outfits/{outfit}/download', [OutfitController::class, 'download']);
 
 Route::get('/{any}', function () {
     return view('layouts.vue');

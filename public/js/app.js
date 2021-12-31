@@ -41051,7 +41051,7 @@ var render = function () {
                     {
                       staticClass: "btn btn-secondary",
                       attrs: {
-                        href: "/outfits/" + _vm.outfit.url + "/download",
+                        href: "/outfits/" + _vm.outfit.id + "/download",
                         title: "Download outfit",
                       },
                     },

@@ -14,7 +14,7 @@ class OutfitController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show', 'download']);
     }
 
     public function index()
@@ -24,10 +24,10 @@ class OutfitController extends Controller
 
     public function create(StoreOutfit $request)
     {
-        $filePath = $request->outfit->store('outfits', 'public');
+        $fileName = $request->outfit->store('outfits', 'public');
 
         $outfit = new Outfit;
-        $outfit->outfit = basename($filePath);
+        $outfit->outfit = basename($fileName);
         $outfit->description = $request->description;
         $outfit->user_id = Auth::id();
 
@@ -42,5 +42,19 @@ class OutfitController extends Controller
         $outfit = Outfit::where('id', $id)->with(['user'])->first();
 
         return $outfit ?? abort(404);
+    }
+
+    public function download(Outfit $outfit)
+    {
+        $filePath = 'public/outfits/' . $outfit->outfit;
+        $mimeType = Storage::mimeType($filePath);
+
+        $disposition = 'attachment; outfit="' . $outfit->outfit . '"';
+        $headers = [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => $disposition,
+        ];
+
+        return Storage::download($filePath, $outfit->outfit, $headers);
     }
 }
