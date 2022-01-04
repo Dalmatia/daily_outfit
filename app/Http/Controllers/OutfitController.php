@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOutfit;
+use App\Http\Requests\StoreComment;
 use App\Models\Outfit;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +42,7 @@ class OutfitController extends Controller
 
     public function show(string $id)
     {
-        $outfit = Outfit::where('id', $id)->with(['user'])->first();
+        $outfit = Outfit::where('id', $id)->with(['user', 'comments.author'])->first();
 
         return $outfit ?? abort(404);
     }
@@ -57,5 +59,18 @@ class OutfitController extends Controller
         ];
 
         return Storage::download($filePath, $outfit->outfit, $headers);
+    }
+
+    public function addComment(Outfit $outfit, StoreComment $request)
+    {
+        $comment = new Comment();
+        $comment->content = $request->get('content');
+        $comment->user_id = Auth::user()->id;
+        $outfit->comments()->save($comment);
+
+        // authorリレーションをロードするためにコメントを取得しなおす
+        $new_comment = Comment::where('id', $comment->id)->with('author')->first();
+
+        return response($new_comment, 201);
     }
 }

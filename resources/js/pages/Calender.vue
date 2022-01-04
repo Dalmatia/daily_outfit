@@ -35,7 +35,8 @@
                     <template v-slot:event="{ event }">
                         <div>
                             <img
-                                src="/storage/outfits/2l5fDBAbPu7LNIYI2UYccQ4I7MdrbrfZLXFI40wg.jpg" class="img-fluid"
+                                src="/storage/outfits/RKLtJxSgddYt6siD09GUG4UbMa5IB1J22KT66syY.jpg"
+                                class="img-fluid"
                             />
                         </div>
                     </template>

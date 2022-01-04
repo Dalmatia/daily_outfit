@@ -12,7 +12,7 @@ class Outfit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'outfit', 'description'
+        'outfit', 'description', 'comments'
     ];
 
     public function user()
@@ -28,4 +28,9 @@ class Outfit extends Model
     protected $appends = [
         'url',
     ];
+
+    public function comments()
+{
+    return $this->hasMany('App\Models\Comment')->orderBy('id', 'desc');
+}
 }

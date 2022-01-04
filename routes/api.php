@@ -28,5 +28,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/user', fn () => Auth::user())->name('user');
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/outfits', [OutfitController::class, 'create'])->name('outfit.create');
+    Route::post('/outfits/{outfit}/comments', [OutfitController::class, 'addComment'])->name('outfit.comment');
 });
 Route::get('/outfits/{id}', [OutfitController::class, 'show'])->name('outfit.show');

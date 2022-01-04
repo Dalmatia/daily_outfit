@@ -2166,6 +2166,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Calender',
   data: function data() {
@@ -2535,12 +2536,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2604,7 +2654,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       outfit: null,
       description: null,
-      fullWidth: false
+      fullWidth: false,
+      commentContent: ''
     };
   },
   created: function created() {
@@ -2634,6 +2685,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    addComment: function addComment() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post("/api/outfits/".concat(_this2.id, "/comments"), {
+                  content: _this2.commentContent
+                });
+
+              case 2:
+                response = _context2.sent;
+                _this2.commentContent = '';
+                _this2.outfit.comments = [response.data].concat(_toConsumableArray(_this2.outfit.comments));
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -40554,7 +40632,7 @@ var render = function () {
                           _c("img", {
                             staticClass: "img-fluid",
                             attrs: {
-                              src: "/storage/outfits/2l5fDBAbPu7LNIYI2UYccQ4I7MdrbrfZLXFI40wg.jpg",
+                              src: "/storage/outfits/RKLtJxSgddYt6siD09GUG4UbMa5IB1J22KT66syY.jpg",
                             },
                           }),
                         ]),
@@ -41131,7 +41209,7 @@ var render = function () {
                   _c(
                     "a",
                     {
-                      staticClass: "btn btn-secondary",
+                      staticClass: "btn btn-outline-secondary",
                       attrs: {
                         href: "/outfits/" + _vm.outfit.id + "/download",
                         title: "Download outfit",
@@ -41139,7 +41217,7 @@ var render = function () {
                     },
                     [
                       _c("i", { staticClass: "fas fa-download" }),
-                      _vm._v("Download\n                "),
+                      _vm._v(" Download\n                "),
                     ]
                   ),
                   _vm._v(" "),
@@ -41156,13 +41234,105 @@ var render = function () {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c("h2", { staticClass: "outfit-detail-comment font-alt" }, [
-                    _vm._v("コメント"),
-                  ]),
-                  _vm._v(" "),
                   _vm._m(1),
                   _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "form",
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.addComment.apply(null, arguments)
+                        },
+                      },
+                    },
+                    [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.commentContent,
+                            expression: "commentContent",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "3" },
+                        domProps: { value: _vm.commentContent },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.commentContent = $event.target.value
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm._m(2),
+                    ]
+                  ),
+                  _vm._v(" "),
                   _c("br"),
+                  _vm._v(" "),
+                  _vm.outfit.comments.length > 0
+                    ? _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "\n                        outfit-detail-comments\n                        list-unstyled list-group-flush\n                    ",
+                        },
+                        _vm._l(_vm.outfit.comments, function (comment) {
+                          return _c(
+                            "li",
+                            {
+                              key: comment.content,
+                              staticClass:
+                                "outfit-detail__commentItem list-group-item",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "d-flex justify-content-between",
+                                },
+                                [
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "outfit-detail__commentBody",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(comment.content) +
+                                          "\n                            "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    {
+                                      staticClass: "outfit-detail__commentUser",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(comment.author.name) +
+                                          "\n                            "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    : _c("p", [_vm._v("コメントはまだありません")]),
                 ]
               ),
             ]),
@@ -41182,15 +41352,32 @@ var staticRenderFns = [
         staticClass: "button--like btn btn-outline-dark",
         attrs: { title: "Like outfit" },
       },
-      [_c("i", { staticClass: "fas fa-heart" }), _vm._v("12\n                ")]
+      [_c("i", { staticClass: "fas fa-heart" })]
     )
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form" }, [
-      _c("textarea", { staticClass: "form-control", attrs: { rows: "3" } }),
+    return _c("h2", { staticClass: "outfit-detail-comment font-alt" }, [
+      _c("i", { staticClass: "fas fa-comments" }),
+      _vm._v("コメント\n                "),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form__button text-right mt-2" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-dark text-white", attrs: { type: "submit" } },
+        [
+          _vm._v(
+            "\n                            コメントする\n                        "
+          ),
+        ]
+      ),
     ])
   },
 ]
