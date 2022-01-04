@@ -2153,12 +2153,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Calender',
   data: function data() {
     return {
+      events: [],
+      outfits: [],
       type: 'month'
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('api/outfits').then(function (_ref) {
+      var data = _ref.data;
+      _this.outfits = data.outfits;
+    });
+  },
+  methods: {
+    rnd: function rnd(a, b) {
+      return Math.floor((b - a + 1) * Math.random()) + a;
+    },
+    getEvents: function getEvents(_ref2) {
+      var start = _ref2.start,
+          end = _ref2.end;
+      this.events = [];
+      console.log(start);
+      var min = new Date("".concat(start.date, "T00:00:00"));
+      var max = new Date("".concat(end.date, "T23:59:59"));
+      var days = (max.getTime() - min.getTime()) / 86400000;
+      var eventCount = this.rnd(days, days + 20);
+
+      for (var i = 0; i < eventCount; i++) {
+        var allDay = this.rnd(0, 3) === 0;
+        var firstTimestamp = this.rnd(min.getTime(), max.getTime());
+        var first = new Date(firstTimestamp - firstTimestamp % 900000);
+        this.events.push({
+          name: this.outfits[this.rnd(0, this.outfits.length - 1)],
+          start: first,
+          timed: !allDay
+        });
+        console.log(this.events);
+      }
+    }
   }
 });
 
@@ -2366,6 +2416,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _outfit_Create_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./outfit/Create.vue */ "./resources/js/pages/outfit/Create.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40482,7 +40537,31 @@ var render = function () {
             { attrs: { height: "150vh" } },
             [
               _c("v-calendar", {
-                attrs: { locale: "ja-jp", type: _vm.type, color: "primary" },
+                attrs: {
+                  locale: "ja-jp",
+                  type: _vm.type,
+                  events: _vm.events,
+                  color: "primary",
+                },
+                on: { change: _vm.getEvents },
+                scopedSlots: _vm._u([
+                  {
+                    key: "event",
+                    fn: function (ref) {
+                      var event = ref.event
+                      return [
+                        _c("div", [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src: "/storage/outfits/2l5fDBAbPu7LNIYI2UYccQ4I7MdrbrfZLXFI40wg.jpg",
+                            },
+                          }),
+                        ]),
+                      ]
+                    },
+                  },
+                ]),
               }),
             ],
             1
@@ -40819,6 +40898,7 @@ var render = function () {
                           },
                         },
                         [
+                          _c("i", { staticClass: "fas fa-home" }),
                           _vm._v(
                             "\n                            Home\n                        "
                           ),
@@ -40842,6 +40922,7 @@ var render = function () {
                           },
                         },
                         [
+                          _c("i", { staticClass: "fas fa-heart" }),
                           _vm._v(
                             "\n                            Favorites\n                        "
                           ),
@@ -40869,6 +40950,7 @@ var render = function () {
                         },
                       },
                       [
+                        _c("i", { staticClass: "fas fa-plus" }),
                         _vm._v(
                           "\n                            コーディネートを投稿する\n                        "
                         ),

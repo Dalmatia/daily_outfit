@@ -19,7 +19,8 @@ class OutfitController extends Controller
 
     public function index()
     {
-        return Outfit::all();
+        $outfits = Outfit::all();
+        return response()->json(compact('outfits'), 200);
     }
 
     public function create(StoreOutfit $request)

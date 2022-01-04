@@ -25,7 +25,20 @@
                 </v-toolbar>
             </v-sheet>
             <v-sheet height="150vh">
-                <v-calendar locale="ja-jp" :type="type" color="primary">
+                <v-calendar
+                    locale="ja-jp"
+                    :type="type"
+                    :events="events"
+                    color="primary"
+                    @change="getEvents"
+                >
+                    <template v-slot:event="{ event }">
+                        <div>
+                            <img
+                                src="/storage/outfits/2l5fDBAbPu7LNIYI2UYccQ4I7MdrbrfZLXFI40wg.jpg" class="img-fluid"
+                            />
+                        </div>
+                    </template>
                 </v-calendar>
             </v-sheet>
         </v-col>
@@ -35,10 +48,45 @@
 <script>
 export default {
     name: 'Calender',
-    data(){
+    data() {
         return {
-            type: 'month'
-        }
-    }
+            events: [],
+            outfits: [],
+            type: 'month',
+        };
+    },
+    created() {
+        axios.get('api/outfits').then(({ data }) => {
+            this.outfits = data.outfits;
+        });
+    },
+    methods: {
+        rnd(a, b) {
+            return Math.floor((b - a + 1) * Math.random()) + a;
+        },
+        getEvents({ start, end }) {
+            this.events = [];
+            console.log(start);
+
+            const min = new Date(`${start.date}T00:00:00`);
+            const max = new Date(`${end.date}T23:59:59`);
+            const days = (max.getTime() - min.getTime()) / 86400000;
+            const eventCount = this.rnd(days, days + 20);
+
+            for (let i = 0; i < eventCount; i++) {
+                const allDay = this.rnd(0, 3) === 0;
+                const firstTimestamp = this.rnd(min.getTime(), max.getTime());
+                const first = new Date(
+                    firstTimestamp - (firstTimestamp % 900000)
+                );
+                this.events.push({
+                    name: this.outfits[this.rnd(0, this.outfits.length - 1)],
+                    start: first,
+                    timed: !allDay,
+                });
+                console.log(this.events);
+            }
+        },
+    },
 };
 </script>

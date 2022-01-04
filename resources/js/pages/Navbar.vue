@@ -1,6 +1,8 @@
 <template>
     <div>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-light p-0 bg-white">
+        <nav
+            class="navbar navbar-expand-lg fixed-top navbar-light p-0 bg-white"
+        >
             <div class="container">
                 <router-link :to="{ name: 'home' }" class="navbar-brand"
                     >DailyOutfits</router-link
@@ -20,6 +22,7 @@
                                 data-toggle="collapse"
                                 :to="{ name: 'home' }"
                             >
+                                <i class="fas fa-home"></i>
                                 Home
                             </router-link>
                         </li>
@@ -29,6 +32,7 @@
                                 data-toggle="collapse"
                                 :to="{ name: 'favorites' }"
                             >
+                                <i class="fas fa-heart"></i>
                                 Favorites
                             </router-link>
                         </li>
@@ -41,6 +45,7 @@
                                 data-target="#exampleModalCenter"
                                 @click="showForm = !showForm"
                             >
+                                <i class="fas fa-plus"></i>
                                 コーディネートを投稿する
                             </button>
                         </li>
