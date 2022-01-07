@@ -2643,6 +2643,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: {
@@ -2712,6 +2717,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    onFavoriteClick: function onFavoriteClick() {
+      if (this.outfit.favorite_by_user) {
+        this.deleteFavorite();
+      } else {
+        this.favorite();
+      }
+    },
+    favorite: function favorite() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.put("/api/outfits/".concat(_this3.id, "/favorite"));
+
+              case 2:
+                response = _context3.sent;
+                console.log(response);
+                _this3.outfit.favorites_count = _this3.outfit.favorites_count + 1;
+                _this3.outfit.favorite_by_user = true;
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    deleteFavorite: function deleteFavorite() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios["delete"]("/api/outfits/".concat(_this4.id, "/favorite"));
+
+              case 2:
+                response = _context4.sent;
+                console.log(response);
+                _this4.outfit.favorites_count = _this4.outfit.favorites_count - 1;
+                _this4.outfit.favorite_by_user = false;
+
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -41184,7 +41248,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "col-sm-12 col-md-5",
+                  staticClass: "col-sm-12 col-md-5 p-0 mb-3",
                   on: {
                     click: function ($event) {
                       _vm.fullWidth = !_vm.fullWidth
@@ -41221,7 +41285,25 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(0),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "button--like btn btn-outline-dark",
+                      class: {
+                        "button--liked": _vm.outfit.favorite_by_user,
+                      },
+                      attrs: { title: "Favorite outfit" },
+                      on: { click: _vm.onFavoriteClick },
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-heart" }),
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.outfit.favorites_count) +
+                          "\n                "
+                      ),
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
@@ -41234,7 +41316,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "form",
@@ -41270,7 +41352,7 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _vm._m(2),
+                      _vm._m(1),
                     ]
                   ),
                   _vm._v(" "),
@@ -41342,19 +41424,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "button--like btn btn-outline-dark",
-        attrs: { title: "Like outfit" },
-      },
-      [_c("i", { staticClass: "fas fa-heart" })]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

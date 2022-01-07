@@ -7,7 +7,7 @@
             :class="{ 'outfit-detail--column': fullWidth }"
         >
             <div class="row">
-                <div class="col-sm-12 col-md-5" @click="fullWidth = !fullWidth">
+                <div class="col-sm-12 col-md-5 p-0 mb-3" @click="fullWidth = !fullWidth">
                     <img
                         class="img-fluid m-2 d-block mx-auto"
                         :src="outfit.url"
@@ -28,9 +28,14 @@
                     </a>
                     <button
                         class="button--like btn btn-outline-dark"
-                        title="Like outfit"
+                        :class="{
+                            'button--liked': outfit.favorite_by_user,
+                        }"
+                        title="Favorite outfit"
+                        @click="onFavoriteClick"
                     >
                         <i class="fas fa-heart"></i>
+                        {{ outfit.favorites_count }}
                     </button>
                     <br />
                     <br />
@@ -123,6 +128,33 @@ export default {
             this.commentContent = '';
 
             this.outfit.comments = [response.data, ...this.outfit.comments];
+        },
+        onFavoriteClick() {
+            if (this.outfit.favorite_by_user) {
+                this.deleteFavorite();
+            } else {
+                this.favorite();
+            }
+        },
+        async favorite() {
+            const response = await axios.put(
+                `/api/outfits/${this.id}/favorite`
+            );
+
+            console.log(response);
+
+            this.outfit.favorites_count = this.outfit.favorites_count + 1;
+            this.outfit.favorite_by_user = true;
+        },
+        async deleteFavorite() {
+            const response = await axios.delete(
+                `/api/outfits/${this.id}/favorite`
+            );
+
+            console.log(response);
+
+            this.outfit.favorites_count = this.outfit.favorites_count - 1;
+            this.outfit.favorite_by_user = false;
         },
     },
 };

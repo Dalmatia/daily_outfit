@@ -42,7 +42,7 @@ class OutfitController extends Controller
 
     public function show(string $id)
     {
-        $outfit = Outfit::where('id', $id)->with(['user', 'comments.author'])->first();
+        $outfit = Outfit::where('id', $id)->with(['user', 'comments.author', 'favorites'])->first();
 
         return $outfit ?? abort(404);
     }
@@ -72,5 +72,32 @@ class OutfitController extends Controller
         $new_comment = Comment::where('id', $comment->id)->with('author')->first();
 
         return response($new_comment, 201);
+    }
+
+    public function favorite(string $id)
+    {
+        $outfit = Outfit::where('id', $id)->with('favorites')->first();
+
+        if (!$outfit) {
+            abort(404);
+        }
+
+        $outfit->favorites()->detach(Auth::user()->id);
+        $outfit->favorites()->attach(Auth::user()->id);
+
+        return ["outfit_id" => $id];
+    }
+
+    public function deleteFavorite(string $id)
+    {
+        $outfit = Outfit::where('id', $id)->with('favorites')->first();
+
+        if (!$outfit) {
+            abort(404);
+        }
+
+        $outfit->favorites()->detach(Auth::user()->id);
+
+        return ["outfit_id" => $id];
     }
 }
