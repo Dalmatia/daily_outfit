@@ -32,6 +32,7 @@ class OutfitController extends Controller
         $outfit = new Outfit;
         $outfit->outfit = basename($fileName);
         $outfit->description = $request->description;
+        $outfit->outfit_date = $request->outfit_date;
         $outfit->user_id = Auth::id();
 
         $outfit->save();

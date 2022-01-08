@@ -34,8 +34,9 @@
                 >
                     <template v-slot:event="{ event }">
                         <div>
+                            {{ event }}
                             <img
-                                src="/storage/outfits/RKLtJxSgddYt6siD09GUG4UbMa5IB1J22KT66syY.jpg"
+                                :src="event.outfit"
                                 class="img-fluid"
                             />
                         </div>
@@ -84,6 +85,7 @@ export default {
                     name: this.outfits[this.rnd(0, this.outfits.length - 1)],
                     start: first,
                     timed: !allDay,
+                    // outfit: this.outfits
                 });
                 console.log(this.events);
             }

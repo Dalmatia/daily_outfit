@@ -18,7 +18,7 @@ class CreateOutfitsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('outfit');
             $table->text('description');
-            // $table->date('outfit_date');
+            $table->date('outfit_date');
             $table->softDeletes();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
