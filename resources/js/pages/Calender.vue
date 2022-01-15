@@ -24,22 +24,38 @@
                     </v-menu>
                 </v-toolbar>
             </v-sheet>
-            <v-sheet height="150vh">
+            <v-sheet height="200vh">
                 <v-calendar
                     locale="ja-jp"
+                    ref="calendar"
+                    v-model="value"
+                    :weekdays="weekday"
                     :type="type"
                     :events="events"
-                    color="primary"
+                    :event-overlap-mode="mode"
+                    :event-height="170"
                     @change="getEvents"
                 >
                     <template v-slot:event="{ event }">
-                        <div>
-                            {{ event }}
-                            <img
-                                :src="event.outfit"
-                                class="img-fluid"
-                            />
-                        </div>
+                        <v-row>
+                            <v-col>
+                                <router-link
+                                    :to="{
+                                        name: 'outfitDetail',
+                                        params: { id: event.id.toString() },
+                                    }"
+                                >
+                                    <img
+                                        style="
+                                            height: 170px;
+                                            width: 100%;
+                                            object-fit: cover;
+                                        "
+                                        :src="event.url"
+                                    />
+                                </router-link>
+                            </v-col>
+                        </v-row>
                     </template>
                 </v-calendar>
             </v-sheet>
@@ -52,43 +68,33 @@ export default {
     name: 'Calender',
     data() {
         return {
+            value: '',
+            mode: 'stack',
+            weekday: [0, 1, 2, 3, 4, 5, 6],
             events: [],
             outfits: [],
             type: 'month',
         };
     },
     created() {
-        axios.get('api/outfits').then(({ data }) => {
+        axios.get('/api/outfits').then(({ data }) => {
             this.outfits = data.outfits;
+            this.getEvents();
         });
     },
     methods: {
-        rnd(a, b) {
-            return Math.floor((b - a + 1) * Math.random()) + a;
-        },
-        getEvents({ start, end }) {
-            this.events = [];
-            console.log(start);
-
-            const min = new Date(`${start.date}T00:00:00`);
-            const max = new Date(`${end.date}T23:59:59`);
-            const days = (max.getTime() - min.getTime()) / 86400000;
-            const eventCount = this.rnd(days, days + 20);
-
-            for (let i = 0; i < eventCount; i++) {
-                const allDay = this.rnd(0, 3) === 0;
-                const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-                const first = new Date(
-                    firstTimestamp - (firstTimestamp % 900000)
-                );
-                this.events.push({
-                    name: this.outfits[this.rnd(0, this.outfits.length - 1)],
+        getEvents() {
+            const events = [];
+            for (var i = 0; i < this.outfits.length; i++) {
+                const first = new Date(this.outfits[i].outfit_date);
+                events.push({
+                    name: this.outfits[i].name,
+                    url: this.outfits[i].url,
+                    id: this.outfits[i].id,
                     start: first,
-                    timed: !allDay,
-                    // outfit: this.outfits
                 });
-                console.log(this.events);
             }
+            this.events = events;
         },
     },
 };

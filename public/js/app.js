@@ -2168,10 +2168,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Calender',
   data: function data() {
     return {
+      value: '',
+      mode: 'stack',
+      weekday: [0, 1, 2, 3, 4, 5, 6],
       events: [],
       outfits: [],
       type: 'month'
@@ -2180,37 +2199,28 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('api/outfits').then(function (_ref) {
+    axios.get('/api/outfits').then(function (_ref) {
       var data = _ref.data;
       _this.outfits = data.outfits;
+
+      _this.getEvents();
     });
   },
   methods: {
-    rnd: function rnd(a, b) {
-      return Math.floor((b - a + 1) * Math.random()) + a;
-    },
-    getEvents: function getEvents(_ref2) {
-      var start = _ref2.start,
-          end = _ref2.end;
-      this.events = [];
-      console.log(start);
-      var min = new Date("".concat(start.date, "T00:00:00"));
-      var max = new Date("".concat(end.date, "T23:59:59"));
-      var days = (max.getTime() - min.getTime()) / 86400000;
-      var eventCount = this.rnd(days, days + 20);
+    getEvents: function getEvents() {
+      var events = [];
 
-      for (var i = 0; i < eventCount; i++) {
-        var allDay = this.rnd(0, 3) === 0;
-        var firstTimestamp = this.rnd(min.getTime(), max.getTime());
-        var first = new Date(firstTimestamp - firstTimestamp % 900000);
-        this.events.push({
-          name: this.outfits[this.rnd(0, this.outfits.length - 1)],
-          start: first,
-          timed: !allDay // outfit: this.outfits
-
+      for (var i = 0; i < this.outfits.length; i++) {
+        var first = new Date(this.outfits[i].outfit_date);
+        events.push({
+          name: this.outfits[i].name,
+          url: this.outfits[i].url,
+          id: this.outfits[i].id,
+          start: first
         });
-        console.log(this.events);
       }
+
+      this.events = events;
     }
   }
 });
@@ -3208,6 +3218,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
   }, {
     path: '/outfits/:id',
     component: _pages_OutfitDetail_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    name: 'outfitDetail',
     props: true
   }]
 });
@@ -40797,14 +40808,17 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-sheet",
-            { attrs: { height: "150vh" } },
+            { attrs: { height: "200vh" } },
             [
               _c("v-calendar", {
+                ref: "calendar",
                 attrs: {
                   locale: "ja-jp",
+                  weekdays: _vm.weekday,
                   type: _vm.type,
                   events: _vm.events,
-                  color: "primary",
+                  "event-overlap-mode": _vm.mode,
+                  "event-height": 170,
                 },
                 on: { change: _vm.getEvents },
                 scopedSlots: _vm._u([
@@ -40813,21 +40827,50 @@ var render = function () {
                     fn: function (ref) {
                       var event = ref.event
                       return [
-                        _c("div", [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(event) +
-                              "\n                        "
-                          ),
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: { src: event.outfit },
-                          }),
-                        ]),
+                        _c(
+                          "v-row",
+                          [
+                            _c(
+                              "v-col",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    attrs: {
+                                      to: {
+                                        name: "outfitDetail",
+                                        params: { id: event.id.toString() },
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        height: "170px",
+                                        width: "100%",
+                                        "object-fit": "cover",
+                                      },
+                                      attrs: { src: event.url },
+                                    }),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
                       ]
                     },
                   },
                 ]),
+                model: {
+                  value: _vm.value,
+                  callback: function ($$v) {
+                    _vm.value = $$v
+                  },
+                  expression: "value",
+                },
               }),
             ],
             1

@@ -36,6 +36,7 @@ const router = new VueRouter({
         {
             path: '/outfits/:id',
             component: OutfitDetail,
+            name: 'outfitDetail',
             props: true,
         },
     ],
