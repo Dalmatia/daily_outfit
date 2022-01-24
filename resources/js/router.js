@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import Home from './pages/Home.vue';
 import Favorites from './pages/Favorites.vue';
+import Calender from './pages/Calender.vue';
 import Register from './pages/Register.vue';
 import Login from './pages/Login.vue';
 import OutfitDetail from './pages/OutfitDetail.vue';
@@ -22,6 +23,11 @@ const router = new VueRouter({
             path: '/favorites',
             name: 'favorites',
             component: Favorites,
+        },
+        {
+            path: '/calender',
+            name: 'calender',
+            component: Calender,
         },
         {
             path: '/register',

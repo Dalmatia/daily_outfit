@@ -7,7 +7,10 @@
             :class="{ 'outfit-detail--column': fullWidth }"
         >
             <div class="row">
-                <div class="col-sm-12 col-md-5 p-0 mb-3" @click="fullWidth = !fullWidth">
+                <div
+                    class="col-sm-12 col-md-5 p-0 mb-3"
+                    @click="fullWidth = !fullWidth"
+                >
                     <img
                         class="img-fluid m-2 d-block mx-auto"
                         :src="outfit.url"
@@ -155,6 +158,14 @@ export default {
 
             this.outfit.favorites_count = this.outfit.favorites_count - 1;
             this.outfit.favorite_by_user = false;
+        },
+    },
+    watch: {
+        $route: {
+            async handler() {
+                await this.fetchOutfit();
+            },
+            immediate: true,
         },
     },
 };

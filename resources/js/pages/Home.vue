@@ -1,27 +1,17 @@
 <template>
     <div>
         <v-app>
-            <Calender />
+            <OutfitList />
         </v-app>
     </div>
 </template>
 
 <script>
-import Calender from './Calender.vue';
+import OutfitList from './OutfitList.vue';
 
 export default {
     components: {
-        Calender,
+        OutfitList,
     },
 };
 </script>
-
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-}
-</style>

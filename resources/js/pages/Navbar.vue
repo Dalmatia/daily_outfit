@@ -36,6 +36,16 @@
                                 Favorites
                             </router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link
+                                class="nav-link"
+                                data-toggle="collapse"
+                                :to="{ name: 'calender' }"
+                            >
+                                <i class="far fa-calendar"></i>
+                                Calender
+                            </router-link>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item m-auto">
