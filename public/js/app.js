@@ -2184,6 +2184,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Calender',
   data: function data() {
@@ -2196,6 +2206,9 @@ __webpack_require__.r(__webpack_exports__);
       type: 'month'
     };
   },
+  mounted: function mounted() {
+    this.$refs.calendar.checkChange();
+  },
   created: function created() {
     var _this = this;
 
@@ -2207,6 +2220,12 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    prev: function prev() {
+      this.$refs.calendar.prev();
+    },
+    next: function next() {
+      this.$refs.calendar.next();
+    },
     getEvents: function getEvents() {
       var events = [];
 
@@ -41049,6 +41068,56 @@ var render = function () {
                     ],
                     1
                   ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        fab: "",
+                        text: "",
+                        small: "",
+                        color: "grey darken-2",
+                      },
+                      on: { click: _vm.prev },
+                    },
+                    [
+                      _c("v-icon", { attrs: { small: "" } }, [
+                        _vm._v(" mdi-chevron-left "),
+                      ]),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        fab: "",
+                        text: "",
+                        small: "",
+                        color: "grey darken-2",
+                      },
+                      on: { click: _vm.next },
+                    },
+                    [
+                      _c("v-icon", { attrs: { small: "" } }, [
+                        _vm._v(" mdi-chevron-right "),
+                      ]),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.$refs.calendar
+                    ? _c("v-toolbar-title", [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.$refs.calendar.title) +
+                            "\n                "
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-spacer"),
                 ],
                 1
               ),

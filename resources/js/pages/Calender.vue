@@ -22,6 +22,16 @@
                             </v-list-item>
                         </v-list>
                     </v-menu>
+                    <v-btn fab text small color="grey darken-2" @click="prev">
+                        <v-icon small> mdi-chevron-left </v-icon>
+                    </v-btn>
+                    <v-btn fab text small color="grey darken-2" @click="next">
+                        <v-icon small> mdi-chevron-right </v-icon>
+                    </v-btn>
+                    <v-toolbar-title v-if="$refs.calendar">
+                        {{ $refs.calendar.title }}
+                    </v-toolbar-title>
+                    <v-spacer></v-spacer>
                 </v-toolbar>
             </v-sheet>
             <v-sheet height="200vh">
@@ -76,6 +86,9 @@ export default {
             type: 'month',
         };
     },
+    mounted() {
+        this.$refs.calendar.checkChange();
+    },
     created() {
         axios.get('/api/outfits').then(({ data }) => {
             this.outfits = data.outfits;
@@ -83,6 +96,12 @@ export default {
         });
     },
     methods: {
+        prev() {
+            this.$refs.calendar.prev();
+        },
+        next() {
+            this.$refs.calendar.next();
+        },
         getEvents() {
             const events = [];
             for (var i = 0; i < this.outfits.length; i++) {
