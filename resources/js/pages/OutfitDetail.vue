@@ -40,6 +40,15 @@
                         <i class="fas fa-heart"></i>
                         {{ outfit.favorites_count }}
                     </button>
+                    <a
+                        href=""
+                        class="float-right text-secondary text-decoration-none"
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        @click="showEdit = !showEdit"
+                    >
+                        <i class="fas fa-edit"></i> 編集する
+                    </a>
                     <br />
                     <br />
                     <p
@@ -88,15 +97,22 @@
                             </div>
                         </li>
                     </ul>
-                    <p v-else>コメントはまだありません</p>
+                    <p class="text-center" v-else>コメントはまだありません</p>
                 </div>
             </div>
+        </div>
+        <div class="modal-body">
+            <Edit v-model="showEdit" />
         </div>
     </div>
 </template>
 
 <script>
+import Edit from './Edit.vue';
 export default {
+    components: {
+        Edit,
+    },
     props: {
         id: {
             type: String,
@@ -109,6 +125,7 @@ export default {
             description: null,
             fullWidth: false,
             commentContent: '',
+            showEdit: false,
         };
     },
     created() {
@@ -117,7 +134,6 @@ export default {
     methods: {
         async fetchOutfit() {
             const response = await axios.get(`/api/outfits/${this.id}`);
-            console.log(response);
             this.outfit = response.data;
         },
         async addComment() {

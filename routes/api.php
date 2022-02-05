@@ -31,5 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/outfits/{outfit}/comments', [OutfitController::class, 'addComment'])->name('outfit.comment');
     Route::put('/outfits/{id}/favorite', [OutfitController::class, 'favorite'])->name('outfit.favorite');
     Route::delete('/outfits/{id}/favorite', [OutfitController::class, 'deleteFavorite']);
+    Route::put('/outfits/{id}/edit', [OutfitController::class, 'update']);
 });
 Route::get('/outfits/{id}', [OutfitController::class, 'show'])->name('outfit.show');

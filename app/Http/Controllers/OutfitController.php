@@ -48,6 +48,28 @@ class OutfitController extends Controller
         return $outfit ?? abort(404);
     }
 
+    public function update($id, Request $request)
+    {
+        $findOutfit = Outfit::find($id);
+        $editOutfit = $findOutfit->outfit;
+
+        if ($request->hasFile('outfit')) {
+            $file = $request->file('outfit');
+            $editOutfit = $file->hashName();
+            $file->move('./outfits/', $editOutfit);
+        }
+        $outfit = Outfit::find($id);
+
+        $outfit->outfit = $editOutfit;
+        $outfit->description = $request->description;
+        $outfit->outfit_date = $request->outfit_date;
+
+        $success = $outfit->save();
+        if ($success) {
+            return response()->json(201);
+        }
+    }
+
     public function download(Outfit $outfit)
     {
         $filePath = 'public/outfits/' . $outfit->outfit;
