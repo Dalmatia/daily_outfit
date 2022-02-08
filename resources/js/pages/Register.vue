@@ -83,11 +83,11 @@ export default {
         };
     },
     methods: {
-        registerUser() {
-            axios
-                .post('api/register', this.formData)
+        async registerUser() {
+            await this.$store
+                .dispatch('auth/register', this.formData)
                 .then((response) => {
-                    console.log(response.data);
+                    console.log(response);
                     this.formData.name =
                         this.formData.email =
                         this.formData.password =
@@ -98,8 +98,8 @@ export default {
                     this.$register.success('アカウント登録が完了しました!');
                 })
                 .catch((errors) => {
-                    this.errors = errors.response.data.errors;
-                    console.log(errors.response.data.errors);
+                    this.errors = errors.response;
+                    console.log(errors.response);
                 });
         },
     },

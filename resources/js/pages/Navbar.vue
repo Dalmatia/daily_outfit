@@ -47,27 +47,34 @@
                             </router-link>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item m-auto">
-                            <button
-                                class="btn btn-outline-dark"
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"
-                                @click="showForm = !showForm"
-                            >
-                                <i class="fas fa-plus"></i>
-                                コーディネートを投稿する
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <router-link
-                                class="nav-link"
-                                data-toggle="collapse"
-                                :to="{ name: 'login' }"
-                                >ログイン / 新規登録
-                            </router-link>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item m-auto">
+                                <button
+                                    class="btn btn-outline-dark"
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"
+                                    @click="showForm = !showForm"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                    コーディネートを投稿する
+                                </button>
+                            </li>
+                            <span v-if="isLogin" class="navbar-item m-auto p-2">
+                                {{ username }}
+                            </span>
+                            <div v-else>
+                                <li class="nav-item">
+                                    <router-link
+                                        class="nav-link"
+                                        data-toggle="collapse"
+                                        :to="{ name: 'login' }"
+                                        >ログイン / 新規登録
+                                    </router-link>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -106,6 +113,14 @@ import Create from './outfit/Create.vue';
 export default {
     components: {
         Create,
+    },
+    computed: {
+        isLogin() {
+            return this.$store.getters['auth/check'];
+        },
+        username() {
+            return this.$store.getters['auth/username'];
+        },
     },
     data() {
         return {

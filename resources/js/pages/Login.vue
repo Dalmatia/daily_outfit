@@ -64,9 +64,9 @@ export default {
         };
     },
     methods: {
-        login() {
-            axios
-                .post('api/login', this.formData)
+        async login() {
+            await this.$store
+                .dispatch('auth/login', this.formData)
                 .then(() => {
                     this.$router.push('/');
                 })

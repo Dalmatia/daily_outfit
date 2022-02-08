@@ -1,3 +1,4 @@
+import './bootstrap';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -35,11 +36,15 @@ Vue.use(Vuetify);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+const createApp = async () => {
+    await store.dispatch('auth/currentUser');
+    new Vue({
+        el: '#app',
+        router,
+        store,
+        vuetify: new Vuetify(),
+        render: (h) => h(App),
+    });
+};
 
-const app = new Vue({
-    el: '#app',
-    router,
-    store,
-    vuetify: new Vuetify(),
-    render: (h) => h(App),
-});
+createApp();

@@ -171,6 +171,7 @@ export default {
             console.log(response);
             this.outfit = response.data;
             this.preview = this.outfit.url;
+            console.log(this.preview);
         },
         updateOutfit() {
             const config = {
@@ -180,8 +181,8 @@ export default {
             };
             let formData = new FormData();
             formData.append('outfit', this.outfit);
-            formData.append('description', this.description);
-            formData.append('outfit_date', this.outfit_date);
+            formData.append('description', this.outfit.description);
+            formData.append('outfit_date', this.outfit.outfit_date);
             formData.append('_method', 'put');
             axios
                 .post(
@@ -192,6 +193,14 @@ export default {
                 .then((response) => {
                     $('#editModal').modal('hide');
                     this.$emit('recordUpdated', response);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '変更内容を保存しました',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);
