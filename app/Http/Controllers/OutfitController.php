@@ -6,6 +6,7 @@ use App\Http\Requests\StoreOutfit;
 use App\Http\Requests\StoreComment;
 use App\Models\Outfit;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,11 @@ class OutfitController extends Controller
     {
         $outfit = Outfit::where('id', $id)->with(['user', 'comments.author', 'favorites'])->first();
 
+        $userId = Outfit::where('id', $id)->first()->user_id;
+        $follows = (new User)->myFollowing($userId);
+
         return $outfit ?? abort(404);
+        return view(compact('follows', 'userId'));
     }
 
     public function update($id, Request $request)

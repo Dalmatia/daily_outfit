@@ -60,19 +60,48 @@
                                     コーディネートを投稿する
                                 </button>
                             </li>
-                            <span v-if="isLogin" class="navbar-item m-auto p-2">
-                                {{ username }}
-                            </span>
-                            <div v-else>
-                                <li class="nav-item">
+                            <li class="nav-item dropdown">
+                                <a
+                                    v-if="isLogin"
+                                    class="nav-link dropdown-toggle text-center"
+                                    href="#"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    {{ username }}
+                                </a>
+                                <router-link
+                                    v-else
+                                    class="nav-link text-center"
+                                    data-toggle="collapse"
+                                    :to="{ name: 'login' }"
+                                    >ログイン / 新規登録
+                                </router-link>
+                                <div
+                                    class="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="navbarDropdown"
+                                >
                                     <router-link
-                                        class="nav-link"
-                                        data-toggle="collapse"
-                                        :to="{ name: 'login' }"
-                                        >ログイン / 新規登録
+                                        class="dropdown-item text-center"
+                                        :to="{ name: 'follows' }"
+                                        >フォロー&フォロワー
                                     </router-link>
-                                </li>
-                            </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div>
+                                        <a
+                                            v-if="isLogin"
+                                            class="dropdown-item text-center"
+                                            href="#"
+                                            @click.prevent="logout"
+                                        >
+                                            ログアウト
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -126,6 +155,13 @@ export default {
         return {
             showForm: false,
         };
+    },
+    methods: {
+        async logout() {
+            await this.$store.dispatch('auth/logout').then(() => {
+                this.$router.push('/login');
+            });
+        },
     },
 };
 </script>

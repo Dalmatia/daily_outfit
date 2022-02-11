@@ -7,6 +7,7 @@ import Calender from './pages/Calender.vue';
 import Register from './pages/Register.vue';
 import Login from './pages/Login.vue';
 import OutfitDetail from './pages/OutfitDetail.vue';
+import Follows from './pages/Follows.vue';
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,11 @@ const router = new VueRouter({
             component: OutfitDetail,
             name: 'outfitDetail',
             props: true,
+        },
+        {
+            path: '/follows',
+            name: 'follows',
+            component: Follows,
         },
     ],
 });

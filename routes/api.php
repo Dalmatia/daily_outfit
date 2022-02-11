@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\OutfitController;
 
 /*
@@ -32,5 +33,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/outfits/{id}/favorite', [OutfitController::class, 'favorite'])->name('outfit.favorite');
     Route::delete('/outfits/{id}/favorite', [OutfitController::class, 'deleteFavorite']);
     Route::put('/outfits/{id}/edit', [OutfitController::class, 'update']);
+    Route::post('/follow', [FollowController::class, 'followNofollow']);
 });
 Route::get('/outfits/{id}', [OutfitController::class, 'show'])->name('outfit.show');

@@ -55,6 +55,15 @@
                         class="description border-bottom"
                         v-text="outfit.description"
                     ></p>
+                    <h6 class="text-right">
+                        投稿者:
+                        <router-link
+                            class="text-decoration-none text-primary"
+                            :to="{ name: 'calender' }"
+                        >
+                            {{ outfit.user.name }}
+                        </router-link>
+                    </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">
                         <i class="fas fa-comments"></i>コメント
