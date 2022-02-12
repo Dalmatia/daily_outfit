@@ -63,6 +63,7 @@
                         >
                             {{ outfit.user.name }}
                         </router-link>
+                        <FollowBtn :userId="outfit.user_id"/>
                     </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">
@@ -118,9 +119,12 @@
 
 <script>
 import Edit from './Edit.vue';
+import FollowBtn from './FollowButton.vue';
+
 export default {
     components: {
         Edit,
+        FollowBtn,
     },
     props: {
         id: {

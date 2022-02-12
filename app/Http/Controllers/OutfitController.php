@@ -46,11 +46,7 @@ class OutfitController extends Controller
     {
         $outfit = Outfit::where('id', $id)->with(['user', 'comments.author', 'favorites'])->first();
 
-        $userId = Outfit::where('id', $id)->first()->user_id;
-        $follows = (new User)->myFollowing($userId);
-
         return $outfit ?? abort(404);
-        return view(compact('follows', 'userId'));
     }
 
     public function update($id, Request $request)
