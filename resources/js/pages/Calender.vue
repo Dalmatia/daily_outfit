@@ -43,7 +43,7 @@
                     :type="type"
                     :events="events"
                     :event-overlap-mode="mode"
-                    :event-height="170"
+                    :event-height="200"
                     @change="getEvents"
                 >
                     <template v-slot:event="{ event }">
@@ -57,7 +57,7 @@
                                 >
                                     <img
                                         style="
-                                            height: 170px;
+                                            height: 200px;
                                             width: 100%;
                                             object-fit: cover;
                                         "

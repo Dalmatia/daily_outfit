@@ -51,11 +51,13 @@
                     </a>
                     <br />
                     <br />
-                    <p
-                        class="description border-bottom"
-                        v-text="outfit.description"
-                    ></p>
-                    <h6 class="text-right">
+                    <p class="description border-bottom pb-1 mb-0">
+                        {{ outfit.description }}
+                    </p>
+                    <p class="text-right mb-2">
+                        投稿日:{{ outfit.outfit_date }}
+                    </p>
+                    <h6 class="text-right mt-3">
                         投稿者:
                         <router-link
                             class="text-decoration-none text-primary"
@@ -63,7 +65,7 @@
                         >
                             {{ outfit.user.name }}
                         </router-link>
-                        <FollowBtn :userId="outfit.user_id"/>
+                        <FollowBtn :userId="outfit.user_id" />
                     </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">

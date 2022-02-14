@@ -9,6 +9,8 @@ import Login from './pages/Login.vue';
 import OutfitDetail from './pages/OutfitDetail.vue';
 import Follows from './pages/Follows.vue';
 
+import store from './store';
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -39,6 +41,13 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: Login,
+            beforeEnter(to, from, next) {
+                if (store.getters['auth/check']) {
+                    next('/');
+                } else {
+                    next();
+                }
+            },
         },
         {
             path: '/outfits/:id',

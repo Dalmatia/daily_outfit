@@ -2765,7 +2765,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return _this.$store.dispatch('auth/login', _this.formData).then(function () {
-                  _this.$router.push('/');
+                  location.href = '/';
                 })["catch"](function (errors) {
                   _this.errors = errors.response.data.errors;
                 });
@@ -3019,6 +3019,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -3888,8 +3890,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Home_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue");
 /* harmony import */ var _pages_Favorites_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/Favorites.vue */ "./resources/js/pages/Favorites.vue");
 /* harmony import */ var _pages_Calender_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Calender.vue */ "./resources/js/pages/Calender.vue");
@@ -3897,6 +3899,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Login_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Login.vue */ "./resources/js/pages/Login.vue");
 /* harmony import */ var _pages_OutfitDetail_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/OutfitDetail.vue */ "./resources/js/pages/OutfitDetail.vue");
 /* harmony import */ var _pages_Follows_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Follows.vue */ "./resources/js/pages/Follows.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 
 
 
@@ -3906,8 +3909,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_8__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__["default"]({
+
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_9__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_9__["default"]({
   mode: 'history',
   linkExactActiveClass: 'active',
   routes: [{
@@ -3929,7 +3933,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__["default"]({
   }, {
     path: '/login',
     name: 'login',
-    component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    beforeEnter: function beforeEnter(to, from, next) {
+      if (_store__WEBPACK_IMPORTED_MODULE_7__["default"].getters["auth/check"]) {
+        next('/');
+      } else {
+        next();
+      }
+    }
   }, {
     path: '/outfits/:id',
     component: _pages_OutfitDetail_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -42141,7 +42152,7 @@ var render = function () {
                   type: _vm.type,
                   events: _vm.events,
                   "event-overlap-mode": _vm.mode,
-                  "event-height": 170,
+                  "event-height": 200,
                 },
                 on: { change: _vm.getEvents },
                 scopedSlots: _vm._u([
@@ -42169,7 +42180,7 @@ var render = function () {
                                   [
                                     _c("img", {
                                       staticStyle: {
-                                        height: "170px",
+                                        height: "200px",
                                         width: "100%",
                                         "object-fit": "cover",
                                       },
@@ -43318,14 +43329,29 @@ var render = function () {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c("p", {
-                    staticClass: "description border-bottom",
-                    domProps: { textContent: _vm._s(_vm.outfit.description) },
-                  }),
+                  _c(
+                    "p",
+                    { staticClass: "description border-bottom pb-1 mb-0" },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.outfit.description) +
+                          "\n                "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-right mb-2" }, [
+                    _vm._v(
+                      "\n                    投稿日:" +
+                        _vm._s(_vm.outfit.outfit_date) +
+                        "\n                "
+                    ),
+                  ]),
                   _vm._v(" "),
                   _c(
                     "h6",
-                    { staticClass: "text-right" },
+                    { staticClass: "text-right mt-3" },
                     [
                       _vm._v(
                         "\n                    投稿者:\n                    "

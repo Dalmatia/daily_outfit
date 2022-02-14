@@ -68,7 +68,7 @@ export default {
             await this.$store
                 .dispatch('auth/login', this.formData)
                 .then(() => {
-                    this.$router.push('/');
+                    location.href = '/';
                 })
                 .catch((errors) => {
                     this.errors = errors.response.data.errors;
