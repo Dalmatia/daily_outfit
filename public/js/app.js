@@ -3520,8 +3520,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(response);
                   _this.formData.name = _this.formData.email = _this.formData.password = _this.formData.password_confirmation = '';
                   _this.errors = {};
-
-                  _this.$router.push('/');
+                  location.href = '/';
 
                   _this.$register.success('アカウント登録が完了しました!');
                 })["catch"](function (errors) {

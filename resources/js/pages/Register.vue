@@ -94,7 +94,7 @@ export default {
                         this.formData.password_confirmation =
                             '';
                     this.errors = {};
-                    this.$router.push('/');
+                    location.href = '/';
                     this.$register.success('アカウント登録が完了しました!');
                 })
                 .catch((errors) => {
