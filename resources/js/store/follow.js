@@ -1,43 +1,47 @@
-import axios from 'axios';
-
 const state = {
-    status: null,
-};
-const getters = {
-    check: (state) => !!state.user,
+    following_check: false,
 };
 const mutations = {
-    setStatus(state, status) {
-        state.status = status;
+    follow_action(state, id) {
+        const path = '/api/follow';
+        axios
+            .post(path)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+    follow_check(state, id) {
+        var array = ['/api/follow_check'];
+        let url = array.join('');
+        axios
+            .get(url)
+            .then((res) => {
+                if (res.data == 1) {
+                    state.following_check = true;
+                } else {
+                    state.following_check = false;
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     },
 };
 const actions = {
-    async pushFollow(context, data) {
-        await axios
-            .post('/api/follow', data)
-            .then((result) => {
-                context.commit('setStatus', result.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    follow_do({ commit }, id) {
+        commit('follow_action', id);
     },
-    async deleteFollow(context, data) {
-        await axios
-            .delete('/api/follow', { data: data })
-            .then((result) => {
-                context.commit('setStatus', result.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    follow_check({ commit }, id) {
+        commit('follow_check', id);
     },
 };
 
 export default {
     namespaced: true,
     state,
-    getters,
     mutations,
     actions,
 };

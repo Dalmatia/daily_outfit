@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -42,14 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function following()
+    public function follows()
     {
-        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id')->withTimestamps();
+    }
+
+    public function isFollowing($user_id)
+    {
+        // exists()でテーブルにレコードが存在しているかをチェック
+        return $this->follows()->where('follower_id', $user_id)->exists();
     }
 
     public function myFollowing($userId)
     {
-        return \DB::table('follows')->where('follower_id')->where('following_id', $userId)->exists();
+        return DB::table('follows')->where('follower_id')->where('following_id', $userId)->exists();
     }
 
     public function outfits()

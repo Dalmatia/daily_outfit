@@ -65,7 +65,7 @@
                         >
                             {{ outfit.user.name }}
                         </router-link>
-                        <FollowBtn :userId="outfit.user_id" />
+                        <FollowBtn />
                     </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">

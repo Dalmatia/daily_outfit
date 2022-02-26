@@ -1,63 +1,58 @@
 <template>
     <div>
-        <i
-            class="fas fa-user-plus follow btn btn-primary"
-            @click.prevent="followUser"
-            v-text="buttonText"
-        ></i>
+        <div v-if="followed">フォローされてます</div>
+        <form @submit.prevent="send" class="mb-1">
+            <input type="hidden" name="_token" v-bind:value="csrf" />
+            <div v-if="following_check">
+                <button type="submit" class="btn btn-primary text-light btn-sm">
+                    <i class="fas fa-user-check"></i>
+                    フォロー解除
+                </button>
+            </div>
+            <div v-else>
+                <button type="submit" class="btn btn-primary text-light btn-sm">
+                    <i class="fas fa-user-plus"></i>
+                    フォローする
+                </button>
+            </div>
+        </form>
     </div>
 </template>
+
 <script>
 export default {
-    props: ['userId', 'follows'],
     data() {
         return {
-            status: this.follows,
+            url: '',
         };
     },
-    methods: {
-        followUser() {
-            axios
-                .post('/api/follow', {
-                    userId: this.userId,
-                })
-                .then((response) => {
-                    this.status = !this.status;
-                    console.log(response);
-                })
-                .catch((error) => {
-                    alert('エラーです');
-                });
+    props: ['user_id', 'csrf', 'following', 'followed'],
+    computed: {
+        following_check: {
+            get() {
+                return this.$store.state.follow.following_check;
+            },
+            set() {
+                this.check_follow();
+            },
         },
     },
-    computed: {
-        buttonText() {
-            return this.status ? 'フォロー解除' : 'フォローする';
+    created() {
+        this.first_check();
+    },
+    methods: {
+        first_check() {
+            if (this.following == 1) {
+                this.following_check = true;
+            }
+        },
+        check_follow() {
+            this.$store.dispatch('follow/follow_check', this.user_id);
+        },
+        send() {
+            this.$store.dispatch('follow/follow_do', this.user_id);
+            this.check_follow();
         },
     },
 };
 </script>
-<style scoped>
-.follow {
-    display: inline-block;
-    border: 1px solid #cfcabf;
-    border-radius: 5%;
-    padding: 7px;
-    cursor: pointer;
-}
-.unfollow {
-    display: inline-block;
-    border: 1px solid #cfcabf;
-    border-radius: 5%;
-    padding: 7px;
-    cursor: pointer;
-}
-.unfollow:hover {
-    background-color: #2983fd;
-    color: #fff;
-}
-.follow:hover {
-    background-color: #2983fd;
-    color: #fff;
-}
-</style>

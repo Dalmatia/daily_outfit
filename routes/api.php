@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/outfits/{id}/favorite', [OutfitController::class, 'favorite'])->name('outfit.favorite');
     Route::delete('/outfits/{id}/favorite', [OutfitController::class, 'deleteFavorite']);
     Route::put('/outfits/{id}/edit', [OutfitController::class, 'update']);
-    Route::post('/follow', [FollowController::class, 'followNofollow']);
+    Route::post('/follow', [FollowController::class, 'follow_do'])->name('follow');
+    Route::get('/follow_check', [FollowController::class, 'follow_check'])->name('follow_check');
 });
 Route::get('/outfits/{id}', [OutfitController::class, 'show'])->name('outfit.show');
