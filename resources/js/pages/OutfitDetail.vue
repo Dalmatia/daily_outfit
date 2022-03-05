@@ -65,7 +65,7 @@
                         >
                             {{ outfit.user.name }}
                         </router-link>
-                        <FollowBtn />
+                        <FollowBtn :user_id="user_id" />
                     </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">
@@ -136,6 +136,7 @@ export default {
     },
     data() {
         return {
+            user_id: '',
             outfit: null,
             description: null,
             fullWidth: false,
@@ -150,6 +151,7 @@ export default {
         async fetchOutfit() {
             const response = await axios.get(`/api/outfits/${this.id}`);
             this.outfit = response.data;
+            this.user_id = this.outfit.user_id;
         },
         async addComment() {
             const response = await axios.post(

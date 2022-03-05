@@ -16,10 +16,11 @@ class FollowController extends Controller
     public function follow_do(Request $request)
     {
         $follow_user = User::find(auth()->user()->id);
-        // return $follow_user;
-        if ($follow_user->id != $request->id) {
-            $follow_user->follows()->attach($request->id);
-            return $follow_user->isFollowing($request->id);
+        
+        if ($follow_user->id != $request->user_id) {
+            $follow_user->follows()->toggle($request->user_id);
+            // return $follow_user->isFollowing($request->id);
+            return $follow_user;
         }
     }
 

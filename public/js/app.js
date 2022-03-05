@@ -3175,6 +3175,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      user_id: '',
       outfit: null,
       description: null,
       fullWidth: false,
@@ -3201,8 +3202,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 _this.outfit = response.data;
+                _this.user_id = _this.outfit.user_id;
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -4128,7 +4130,9 @@ var state = {
 var mutations = {
   follow_action: function follow_action(state, id) {
     var path = '/api/follow';
-    axios.post(path).then(function (res) {
+    axios.post(path, {
+      user_id: id
+    }).then(function (res) {
       console.log(res);
     })["catch"](function (error) {
       console.log(error);
@@ -43331,7 +43335,7 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("FollowBtn"),
+                      _c("FollowBtn", { attrs: { user_id: _vm.user_id } }),
                     ],
                     1
                   ),

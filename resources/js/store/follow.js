@@ -5,7 +5,9 @@ const mutations = {
     follow_action(state, id) {
         const path = '/api/follow';
         axios
-            .post(path)
+            .post(path, {
+                user_id: id,
+            })
             .then((res) => {
                 console.log(res);
             })
