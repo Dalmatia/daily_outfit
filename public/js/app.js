@@ -2559,7 +2559,7 @@ __webpack_require__.r(__webpack_exports__);
       url: ''
     };
   },
-  props: ['user_id', 'csrf', 'following', 'followed'],
+  props: ['user_id', 'csrf', 'following', 'followed', 'toggleFollow'],
   computed: {
     following_check: {
       get: function get() {
@@ -2585,6 +2585,7 @@ __webpack_require__.r(__webpack_exports__);
     send: function send() {
       this.$store.dispatch('follow/follow_do', this.user_id);
       this.check_follow();
+      this.$emit('toggleFollow');
     }
   }
 });
@@ -3160,6 +3161,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3297,6 +3301,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    toggleFollow: function toggleFollow() {
+      this.isFollow = !this.isFollow;
     }
   },
   watch: {
@@ -43335,7 +43342,10 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("FollowBtn", { attrs: { user_id: _vm.user_id } }),
+                      _c("FollowBtn", {
+                        attrs: { user_id: _vm.user_id },
+                        on: { toggleFollow: _vm.toggleFollow },
+                      }),
                     ],
                     1
                   ),

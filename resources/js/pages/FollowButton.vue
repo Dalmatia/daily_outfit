@@ -26,7 +26,13 @@ export default {
             url: '',
         };
     },
-    props: ['user_id', 'csrf', 'following', 'followed'],
+    props: [
+        'user_id',
+        'csrf',
+        'following',
+        'followed',
+        'toggleFollow',
+    ],
     computed: {
         following_check: {
             get() {
@@ -52,6 +58,7 @@ export default {
         send() {
             this.$store.dispatch('follow/follow_do', this.user_id);
             this.check_follow();
+            this.$emit('toggleFollow');
         },
     },
 };

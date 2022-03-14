@@ -27,6 +27,6 @@ class FollowController extends Controller
     public function follow_check(Request $request)
     {
         $check_user = User::find(auth()->user()->id);
-        return $check_user->isFollowing($request->id);
+        return $check_user->isFollowing($request->user_id);
     }
 }

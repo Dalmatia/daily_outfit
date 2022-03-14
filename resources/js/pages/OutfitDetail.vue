@@ -65,7 +65,10 @@
                         >
                             {{ outfit.user.name }}
                         </router-link>
-                        <FollowBtn :user_id="user_id" />
+                        <FollowBtn
+                            :user_id="user_id"
+                            @toggleFollow="toggleFollow"
+                        />
                     </h6>
                     <br />
                     <h2 class="outfit-detail-comment font-alt">
@@ -191,6 +194,9 @@ export default {
 
             this.outfit.favorites_count = this.outfit.favorites_count - 1;
             this.outfit.favorite_by_user = false;
+        },
+        toggleFollow() {
+            this.isFollow = !this.isFollow;
         },
     },
     watch: {
